@@ -1,6 +1,45 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 export function Header() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  // Handle window resize and mobile detection
+  useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth <= 992;
+      setIsMobile(mobile);
+      if (!mobile) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    // Initial check
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Element;
+      if (isMobileMenuOpen && !target.closest('.menuzord')) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    if (isMobileMenuOpen) {
+      document.addEventListener('click', handleClickOutside);
+      return () => document.removeEventListener('click', handleClickOutside);
+    }
+  }, [isMobileMenuOpen]);
+
   return (
     <>
       {/* Full Page Search */}
@@ -58,9 +97,28 @@ export function Header() {
                 />
                 Contract Easily
               </a>
-
-              <ul className="menuzord-menu menuzord-menu-bg menuzord-menu-right">
-                <li className="active"><a href="/" title="Index">HOME</a></li>
+              <a
+                href="#"
+                className="showhide"
+                style={{display: isMobile ? 'block' : 'none'}}
+                onClick={(e) => {
+                  e.preventDefault();
+                  toggleMobileMenu();
+                }}
+              >
+                <em></em>
+                <em></em>
+                <em></em>
+              </a>
+              <ul
+                className={`menuzord-menu menuzord-menu-bg menuzord-menu-right ${isMobileMenuOpen ? 'show' : ''}`}
+                style={{
+                  display: isMobile ? (isMobileMenuOpen ? 'flex' : 'none') : 'flex'
+                }}
+              >
+                <li className="active">
+                  <a href="/" title="Index">HOME</a>
+                </li>
                 <li>
                   <a href="#">SOLUTIONS</a>
                   <ul className="dropdown">

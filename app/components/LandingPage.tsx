@@ -7,6 +7,7 @@ import { TestimonialsSection } from './TestimonialsSection';
 import { BlogSection } from './BlogSection';
 import { ClientPartnerSection } from './ClientPartnerSection';
 import { Footer } from './Footer';
+import { Chatbot } from './Chatbot';
 
 export function LandingPage() {
   return (
@@ -19,6 +20,7 @@ export function LandingPage() {
       <BlogSection />
       <ClientPartnerSection />
       <Footer />
+      <Chatbot />
     </div>
   );
 }

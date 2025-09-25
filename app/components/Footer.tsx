@@ -101,7 +101,6 @@ export function Footer() {
           <div className="f-bottom-right-text">
             <ul>
               <li><a href="/blog" title="All Blogs">Blogs</a></li>
-              <li><a href="/faq" title="FREQUENTLY ASKED QUESTIONS">FAQs</a></li>
               <li><a href="/disclaimer" title="Disclaimer">Disclaimer</a></li>
               <li><a href="/privacy" title="Privacy Policy">Privacy Policy</a></li>
               <li><a href="/terms" title="Terms And Conditions">Terms And Conditions</a></li>
