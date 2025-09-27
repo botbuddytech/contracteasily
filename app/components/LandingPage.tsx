@@ -3,6 +3,7 @@ import { Header } from './Header';
 import { HeroSection } from './HeroSection';
 import { StatisticsSection } from './StatisticsSection';
 import { WelcomeSection } from './WelcomeSection';
+import { FeaturesSection } from './FeaturesSection';
 import { TestimonialsSection } from './TestimonialsSection';
 import { BlogSection } from './BlogSection';
 import { ClientPartnerSection } from './ClientPartnerSection';
@@ -15,7 +16,8 @@ export function LandingPage() {
       <Header />
       <HeroSection />
       <StatisticsSection />
-      <WelcomeSection />
+      {/* <WelcomeSection /> */}
+      <FeaturesSection />
       <TestimonialsSection />
       <BlogSection />
       <ClientPartnerSection />

@@ -3,9 +3,26 @@ import React, { useState, useEffect } from 'react';
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [openDropdowns, setOpenDropdowns] = useState<Set<string>>(new Set());
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
+    // Close all dropdowns when mobile menu is closed
+    if (isMobileMenuOpen) {
+      setOpenDropdowns(new Set());
+    }
+  };
+
+  const toggleDropdown = (dropdownId: string) => {
+    setOpenDropdowns(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(dropdownId)) {
+        newSet.delete(dropdownId);
+      } else {
+        newSet.add(dropdownId);
+      }
+      return newSet;
+    });
   };
 
   // Handle window resize and mobile detection
@@ -15,6 +32,7 @@ export function Header() {
       setIsMobile(mobile);
       if (!mobile) {
         setIsMobileMenuOpen(false);
+        setOpenDropdowns(new Set()); // Close all dropdowns on desktop
       }
     };
 
@@ -99,7 +117,7 @@ export function Header() {
               </a>
               <a
                 href="#"
-                className="showhide"
+                className={`showhide ${isMobileMenuOpen ? 'active' : ''}`}
                 style={{display: isMobile ? 'block' : 'none'}}
                 onClick={(e) => {
                   e.preventDefault();
@@ -120,30 +138,86 @@ export function Header() {
                   <a href="/" title="Index">HOME</a>
                 </li>
                 <li>
-                  <a href="#">SOLUTIONS</a>
-                  <ul className="dropdown">
-                    <li><a href="/agreements" title="Legal Document Library">Legal Document Library</a></li>
+                  <a 
+                    href="#" 
+                    onClick={(e) => {
+                      if (isMobile) {
+                        e.preventDefault();
+                        toggleDropdown('solutions');
+                      }
+                    }}
+                    className={isMobile ? 'dropdown-toggle' : ''}
+                  >
+                    SOLUTIONS
+                    {isMobile && (
+                      <i className={`fa fa-chevron-${openDropdowns.has('solutions') ? 'up' : 'down'}`}></i>
+                    )}
+                  </a>
+                  <ul className={`dropdown ${isMobile && openDropdowns.has('solutions') ? 'mobile-open' : ''}`}>
+                    <li><a href="/legal-documents" title="Legal Document Library">Legal Document Library</a></li>
                     <li><a href="/client-reminder" title="Client Reminder System">Client Reminder System</a></li>
                   </ul>
                 </li>
                 <li>
-                  <a href="#">ABOUT</a>
-                  <ul className="dropdown">
+                  <a 
+                    href="#" 
+                    onClick={(e) => {
+                      if (isMobile) {
+                        e.preventDefault();
+                        toggleDropdown('about');
+                      }
+                    }}
+                    className={isMobile ? 'dropdown-toggle' : ''}
+                  >
+                    ABOUT
+                    {isMobile && (
+                      <i className={`fa fa-chevron-${openDropdowns.has('about') ? 'up' : 'down'}`}></i>
+                    )}
+                  </a>
+                  <ul className={`dropdown ${isMobile && openDropdowns.has('about') ? 'mobile-open' : ''}`}>
                     <li><a href="/about" title="About Us">About Us</a></li>
                     <li><a href="/team" title="Our Team">Our Team</a></li>
                   </ul>
                 </li>
                 <li>
-                  <a href="#">SERVICES</a>
-                  <ul className="dropdown">
+                  <a 
+                    href="#" 
+                    onClick={(e) => {
+                      if (isMobile) {
+                        e.preventDefault();
+                        toggleDropdown('services');
+                      }
+                    }}
+                    className={isMobile ? 'dropdown-toggle' : ''}
+                  >
+                    SERVICES
+                    {isMobile && (
+                      <i className={`fa fa-chevron-${openDropdowns.has('services') ? 'up' : 'down'}`}></i>
+                    )}
+                  </a>
+                  <ul className={`dropdown ${isMobile && openDropdowns.has('services') ? 'mobile-open' : ''}`}>
                     <li><a href="/legal-advice" title="Legal Advice">Legal Advice</a></li>
                   </ul>
                 </li>
                 <li><a href="/blog" title="Blog">BLOG</a></li>
                 <li><a href="/contact" title="Contact">CONTACT</a></li>
                 <li>
-                  <a href="#">ACCOUNT</a>
-                  <ul className="dropdown">
+                  <a 
+                    href="#" 
+                    onClick={(e) => {
+                      if (isMobile) {
+                        e.preventDefault();
+                        toggleDropdown('account');
+                      }
+                    }}
+                    className={isMobile ? 'dropdown-toggle' : ''}
+                  >
+                    ACCOUNT
+                    {isMobile && (
+                      <i className={`fa fa-chevron-${openDropdowns.has('account') ? 'up' : 'down'}`}></i>
+                    )}
+                  </a>
+                  <ul className={`dropdown ${isMobile && openDropdowns.has('account') ? 'mobile-open' : ''}`}>
                     <li><a href="/signup" title="SIGN UP">SIGN UP</a></li>
                     <li><a href="/login" title="LOGIN">LOGIN</a></li>
                   </ul>

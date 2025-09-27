@@ -45,7 +45,7 @@ export function Footer() {
                 <h3>Quick Links</h3>
                 <ul>
                   <li><a href="/" title="Home">Home</a></li>
-                  <li><a href="/agreements" title="Legal Document Library">Legal Document Library</a></li>
+                  <li><a href="/legal-documents" title="Legal Document Library">Legal Document Library</a></li>
                   <li><a href="/about" title="About Us">About Us</a></li>
                   <li><a href="/contact" title="Contact Us">Contact Us</a></li>
                   <li><a href="/blog" title="Blog">Blog</a></li>
