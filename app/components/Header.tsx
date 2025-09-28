@@ -155,7 +155,7 @@ export function Header() {
                   </a>
                   <ul className={`dropdown ${isMobile && openDropdowns.has('solutions') ? 'mobile-open' : ''}`}>
                     <li><a href="/legal-documents" title="Legal Document Library">Legal Document Library</a></li>
-                    <li><a href="/client-reminder" title="Client Reminder System">Client Reminder System</a></li>
+                    <li><a href="/client-reminder" title="Client Reminder Bot">Client Reminder Bot</a></li>
                   </ul>
                 </li>
                 <li>
@@ -176,7 +176,6 @@ export function Header() {
                   </a>
                   <ul className={`dropdown ${isMobile && openDropdowns.has('about') ? 'mobile-open' : ''}`}>
                     <li><a href="/about" title="About Us">About Us</a></li>
-                    <li><a href="/team" title="Our Team">Our Team</a></li>
                   </ul>
                 </li>
                 <li>
